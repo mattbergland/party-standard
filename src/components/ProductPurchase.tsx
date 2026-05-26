@@ -106,7 +106,7 @@ export default function ProductPurchase() {
                 </div>
 
                 <div className="mt-6 flex items-center gap-4">
-                  <label htmlFor="quantity" className="text-sm font-medium text-charcoal">
+                  <label htmlFor="purchase-quantity" className="text-sm font-medium text-charcoal">
                     Qty
                   </label>
                   <div className="flex items-center border border-steel-light rounded-sm">

@@ -57,7 +57,7 @@ export default function Hero() {
                   {[0, 1, 2].map((i) => (
                     <div
                       key={i}
-                      className="absolute left-1/2 -translate-x-1/2 w-32 h-40 rounded-b-lg border-2 border-steel-dark/30 bg-gradient-to-b from-steel-light to-steel"
+                      className="absolute left-1/2 w-32 h-40 rounded-b-lg border-2 border-steel-dark/30 bg-gradient-to-b from-steel-light to-steel"
                       style={{
                         bottom: `${i * 12}px`,
                         zIndex: 3 - i,

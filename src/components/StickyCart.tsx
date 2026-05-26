@@ -7,41 +7,30 @@ export default function StickyCart() {
 
   useEffect(() => {
     function handleScroll() {
+      if (window.scrollY < 600) {
+        setVisible(false);
+        return;
+      }
+
       const purchaseSection = document.getElementById("purchase");
-      if (!purchaseSection) return;
+      if (!purchaseSection) {
+        setVisible(true);
+        return;
+      }
 
       const rect = purchaseSection.getBoundingClientRect();
-      const pastPurchase = rect.bottom < 0;
-      const beforePurchase = rect.top > window.innerHeight;
-
-      setVisible(pastPurchase || beforePurchase);
-    }
-
-    // Only show on initial scroll past hero
-    function handleInitialScroll() {
-      setVisible(window.scrollY > 600);
-      const purchaseSection = document.getElementById("purchase");
-      if (purchaseSection) {
-        const rect = purchaseSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          setVisible(false);
-        }
-      }
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      setVisible(!inView);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("scroll", handleInitialScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("scroll", handleInitialScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-warm-white/95 backdrop-blur-sm border-t border-steel-light/40 px-4 py-3 safe-area-inset-bottom">
+    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-warm-white/95 backdrop-blur-sm border-t border-steel-light/40 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <div className="flex items-center justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-charcoal">
